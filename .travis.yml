@@ -1,0 +1,28 @@
+language: node_js # 指定语言环境
+node_js: stable # 要安装的node版本为当前的稳定版
+cache: # 缓存依赖，加快构建速度
+  directories:
+    - node_modules # 要缓存的文件夹
+install: # 依赖安装
+  - npm install
+script:
+  - npm run build # 构建脚本
+after_script: # 最后执行的命令
+  - git init
+  - git config user.name 'haowubai123'
+  - git config user.email 'haowubai123@163.com'
+  - git add .
+  - git commit -m '代码是自动化部署的哈'
+  - git push --fore --quit "https://${token}@${GH_REF}" master:deployBranch 
+branches:
+  only:
+    - master # 触发持续集成的分支
+env:
+  global:
+   - GH_REF: https://github.com/haowubai123/travisTest.git # 就是你github上存放静态博客的仓库地址
+notifications: # 在通知邮件中提供构建结果
+  email:
+    recipients:
+      - haowubai123@163.com
+    on_success: always
+    on_failure: always
