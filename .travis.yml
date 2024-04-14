@@ -20,7 +20,7 @@ branches:
 env:
   global:
    - GH_REF: https://github.com/haowubai123/travisTest.git # 就是你github上存放静态博客的仓库地址
-   - GH_TOKEN: ${DEPLOR} # GitHub Token，需要在Travis CI中定义
+   - GH_TOKEN: "${DEPLOR}" # GitHub Token，需要在Travis CI中定义
 notifications: # 在通知邮件中提供构建结果
   email:
     recipients:
