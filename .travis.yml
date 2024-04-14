@@ -13,13 +13,14 @@ after_script: # 最后执行的命令
   - git config user.email 'haowubai123@163.com'
   - git add .
   - git commit -m '代码是自动化部署的哈'
-  - git push --fore --quit "https://${token}@${GH_REF}" master:deployBranch 
+  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" main:deployBranch # 使用GH_TOKEN替换token
 branches:
   only:
-    - master # 触发持续集成的分支
+    - main # 触发持续集成的分支
 env:
   global:
    - GH_REF: https://github.com/haowubai123/travisTest.git # 就是你github上存放静态博客的仓库地址
+   - GH_TOKEN: ${DEPLOR} # GitHub Token，需要在Travis CI中定义
 notifications: # 在通知邮件中提供构建结果
   email:
     recipients:
